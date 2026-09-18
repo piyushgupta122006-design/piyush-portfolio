@@ -1,0 +1,93 @@
+{
+  "hero": {
+    "name": "Piyush Gupta",
+    "title": "Full-Stack Developer & AI Systems Builder | BSc CS Student (SYCS)",
+    "tagline": "Building high-performance tools for students. Obsessed with Logic, Data & Clean UI.",
+    "cta": [
+      {
+        "label": "GitHub",
+        "url": "https://github.com/piyushgupta122006-design"
+      },
+      {
+        "label": "LinkedIn",
+        "url": "https://www.linkedin.com/in/piyush-gupta-377694335/"
+      }
+    ]
+  },
+  "about": {
+    "bio": [
+      "I am an undergraduate Computer Science student at BNN College (SYCS), Bhiwandi, and a full-stack engineer passionate about building high-performance web systems, AI tooling, and clean intuitive digital products.",
+      "I turn complex technical logic into seamless, production-ready applications — creator of BNN CS Study Hub (adopted by 107+ college students) and FlashCrush (client-side Wasm media & AI studio).",
+      "My core focus is on-device computing, zero-bloat architectures, and leveraging modern AI models like Gemini to build software that provides real utility."
+    ],
+    "currentFocus": [
+      "Full-Stack Web Engineering (React 19, Vite, TypeScript)",
+      "On-Device AI & WebAssembly (Wasm, ONNX)",
+      "Student Ecosystems & Real-Time Portals"
+    ],
+    "location": "Bhiwandi, Mumbai, India",
+    "education": {
+      "institution": "BNN College, Bhiwandi (Mumbai University)",
+      "degree": "BSc Computer Science (SYCS)",
+      "duration": "2025–2028"
+    }
+  },
+  "skills": {
+    "frontend": ["React 19", "JavaScript (ES6+)", "TypeScript", "Tailwind CSS", "HTML5 & CSS3", "Vite", "GSAP"],
+    "backend": ["Firebase Firestore", "Firebase Auth", "Node.js", "REST APIs", "Google Drive API"],
+    "aiAndTools": ["Gemini API", "Prompt Architecture", "WebAssembly (Wasm)", "ONNX AI", "Python", "Git & GitHub", "Vercel"]
+  },
+  "projects": [
+    {
+      "id": "flashcrush",
+      "title": "FlashCrush",
+      "category": "100% Client-Side File Studio, On-Device AI & Cloud Sync",
+      "role": "Lead Full-Stack Engineer & UI/UX Designer",
+      "description": "A high-performance, 100% client-side file manipulation powerhouse that compresses, converts, and processes PDFs & images locally using WebAssembly & on-device AI. Guarantees complete data privacy with zero server uploads, offline PWA capability, and seamless Google Drive sync.",
+      "tools": ["React.js", "Vite", "WebAssembly (Wasm)", "ONNX AI", "Tesseract OCR", "Google Drive API", "PWA", "IndexedDB"],
+      "link": "https://piyush-flash-crush-files.vercel.app/",
+      "github": "https://github.com/piyushgupta122006-design/flash-crush-files",
+      "metrics": "17+ Tools • 0 ms Upload Delay • 100% Data Confidentiality"
+    },
+    {
+      "id": "studyhub",
+      "title": "BNN CS Study Hub (FYCS Library)",
+      "category": "Academic Digital Vault & Real-Time Student Portal",
+      "role": "Team: Rishikesh Sahu (Lead) • Piyush Gupta (Secondary)",
+      "description": "A centralized digital repository and interactive academic portal built for Mumbai University CS students. Serves 107+ active students with 4 semesters of curated syllabus materials, in-browser PDF reader, and real-time Firestore analytics.",
+      "tools": ["React 19", "Vite 7", "Firebase Firestore", "Firebase Auth", "Tailwind CSS", "Framer Motion", "PWA"],
+      "link": "https://fycs-study-hub.vercel.app/",
+      "github": null,
+      "metrics": "107+ Active Students • 4 Semesters Curriculum Vault • Real-Time Sync"
+    },
+    {
+      "id": "stresssense",
+      "title": "StressSense",
+      "category": "Biometric Telemetry & Stress Monitoring",
+      "role": "Full-Stack Prototype Engineer",
+      "description": "Real-time physiological telemetry dashboard tracking GSR, pulse metrics, and stress thresholds. Features interactive telemetry graphing, stress analytics, and cross-platform hardware connectivity.",
+      "tools": ["JavaScript", "Telemetry UI", "Web Prototype", "Data Visualization"],
+      "link": "https://stress-sense-pvs.vercel.app/",
+      "github": null,
+      "metrics": "Real-Time Telemetry • Cross-Platform Prototype"
+    },
+    {
+      "id": "quick-qr",
+      "title": "Quick QR Tool",
+      "category": "Fast Client-Side QR Generator Utility",
+      "role": "Frontend Developer",
+      "description": "Lightweight client-side QR generation engine with customizable color palettes, instant SVG/PNG raster downloads, and dynamic URL encoding.",
+      "tools": ["JavaScript", "REST API", "Async/Await", "Tooling"],
+      "link": "https://piyushgupta122006-design.github.io/QR-Generator/",
+      "github": "https://github.com/piyushgupta122006-design/QR-Generator",
+      "metrics": "Instant SVG/PNG Export • 100% Client-Side"
+    }
+  ],
+  "contact": {
+    "email": "piyushgupta122006@gmail.com",
+    "github": "https://github.com/piyushgupta122006-design",
+    "linkedin": "https://www.linkedin.com/in/piyush-gupta-377694335/",
+    "portfolio": "https://my-portfolio-piyushgupta.vercel.app/",
+    "location": "Bhiwandi, Mumbai, Maharashtra, India"
+  }
+}

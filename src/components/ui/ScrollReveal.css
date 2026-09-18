@@ -1,0 +1,12 @@
+.scroll-reveal {
+  margin: 0;
+}
+
+.scroll-reveal-text {
+  color: #efeee9;
+  font-weight: 300;
+}
+
+.word {
+  display: inline-block;
+}
