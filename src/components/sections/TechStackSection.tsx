@@ -196,7 +196,23 @@ const coreTechItems: LogoItem[] = [
   },
   {
     node: (
-      <div className="flex items-center gap-3 px-5 py-2.5 rounded-full bg-[#111111] border border-cream/15 text-cream hover:border-cream/40 transition-colors">
+      <div className="flex items-center gap-3 px-5 py-2.5 rounded-full bg-[#0F1015] border border-white/10 text-white hover:border-[#FF6B00]/40 hover:text-[#FFA043] transition-colors shadow-sm">
+        <span className="h-2 w-2 rounded-full bg-[#FF6B00]" />
+        <span className="text-sm font-hn font-medium tracking-wide">WebAssembly (Wasm)</span>
+      </div>
+    )
+  },
+  {
+    node: (
+      <div className="flex items-center gap-3 px-5 py-2.5 rounded-full bg-[#0F1015] border border-white/10 text-white hover:border-[#FF6B00]/40 hover:text-[#FFA043] transition-colors shadow-sm">
+        <span className="h-2 w-2 rounded-full bg-[#10B981]" />
+        <span className="text-sm font-hn font-medium tracking-wide">ONNX Runtime</span>
+      </div>
+    )
+  },
+  {
+    node: (
+      <div className="flex items-center gap-3 px-5 py-2.5 rounded-full bg-[#0F1015] border border-white/10 text-white hover:border-[#FF6B00]/40 transition-colors shadow-sm">
         <VercelIcon />
         <span className="text-sm font-hn font-medium tracking-wide">Vercel</span>
       </div>
@@ -208,7 +224,7 @@ const coreTechItems: LogoItem[] = [
 const aiTechItems: LogoItem[] = [
   {
     node: (
-      <div className="flex items-center gap-3 px-5 py-2.5 rounded-full bg-[#111111] border border-cream/15 text-cream hover:border-cream/40 transition-colors">
+      <div className="flex items-center gap-3 px-5 py-2.5 rounded-full bg-[#0F1015] border border-white/10 text-white hover:border-[#FF6B00]/40 transition-colors shadow-sm">
         <ClaudeIcon />
         <span className="text-sm font-hn font-medium tracking-wide">Claude</span>
       </div>
@@ -216,15 +232,15 @@ const aiTechItems: LogoItem[] = [
   },
   {
     node: (
-      <div className="flex items-center gap-3 px-5 py-2.5 rounded-full bg-[#111111] border border-cream/15 text-cream hover:border-cream/40 transition-colors">
+      <div className="flex items-center gap-3 px-5 py-2.5 rounded-full bg-[#0F1015] border border-white/10 text-white hover:border-[#FF6B00]/40 transition-colors shadow-sm">
         <GeminiIcon />
-        <span className="text-sm font-hn font-medium tracking-wide">Gemini</span>
+        <span className="text-sm font-hn font-medium tracking-wide">Gemini 2.0</span>
       </div>
     )
   },
   {
     node: (
-      <div className="flex items-center gap-3 px-5 py-2.5 rounded-full bg-[#111111] border border-cream/15 text-cream hover:border-cream/40 transition-colors">
+      <div className="flex items-center gap-3 px-5 py-2.5 rounded-full bg-[#0F1015] border border-white/10 text-white hover:border-[#FF6B00]/40 transition-colors shadow-sm">
         <CursorIcon />
         <span className="text-sm font-hn font-medium tracking-wide">Cursor</span>
       </div>
@@ -232,7 +248,7 @@ const aiTechItems: LogoItem[] = [
   },
   {
     node: (
-      <div className="flex items-center gap-3 px-5 py-2.5 rounded-full bg-[#111111] border border-cream/15 text-cream hover:border-cream/40 transition-colors">
+      <div className="flex items-center gap-3 px-5 py-2.5 rounded-full bg-[#0F1015] border border-white/10 text-white hover:border-[#FF6B00]/40 transition-colors shadow-sm">
         <OpenAIIcon />
         <span className="text-sm font-hn font-medium tracking-wide">OpenAI</span>
       </div>
@@ -240,7 +256,7 @@ const aiTechItems: LogoItem[] = [
   },
   {
     node: (
-      <div className="flex items-center gap-3 px-5 py-2.5 rounded-full bg-[#111111] border border-cream/15 text-cream hover:border-cream/40 transition-colors">
+      <div className="flex items-center gap-3 px-5 py-2.5 rounded-full bg-[#0F1015] border border-white/10 text-white hover:border-[#FF6B00]/40 transition-colors shadow-sm">
         <FigmaIcon />
         <span className="text-sm font-hn font-medium tracking-wide">Figma</span>
       </div>
@@ -248,7 +264,7 @@ const aiTechItems: LogoItem[] = [
   },
   {
     node: (
-      <div className="flex items-center gap-3 px-5 py-2.5 rounded-full bg-[#111111] border border-cream/15 text-cream hover:border-cream/40 transition-colors">
+      <div className="flex items-center gap-3 px-5 py-2.5 rounded-full bg-[#0F1015] border border-white/10 text-white hover:border-[#FF6B00]/40 transition-colors shadow-sm">
         <ClaudeIcon />
         <span className="text-sm font-hn font-medium tracking-wide">Claude Code</span>
       </div>
@@ -256,7 +272,7 @@ const aiTechItems: LogoItem[] = [
   },
   {
     node: (
-      <div className="flex items-center gap-3 px-5 py-2.5 rounded-full bg-[#111111] border border-cream/15 text-cream hover:border-cream/40 transition-colors">
+      <div className="flex items-center gap-3 px-5 py-2.5 rounded-full bg-[#0F1015] border border-white/10 text-white hover:border-[#FF6B00]/40 transition-colors shadow-sm">
         <GeminiIcon />
         <span className="text-sm font-hn font-medium tracking-wide">Google AI Studio</span>
       </div>
@@ -266,7 +282,7 @@ const aiTechItems: LogoItem[] = [
 
 export const TechStackSection: React.FC = () => {
   return (
-    <section id="tech-stack" className="relative w-full bg-[#070707] text-cream font-hn py-12 sm:py-16 border-t border-cream/15 overflow-hidden">
+    <section id="tech-stack" className="relative w-full bg-[#07080A] text-[#F4F4F5] font-hn py-12 sm:py-16 border-t border-white/[0.08] overflow-hidden">
       <div className="flex flex-col gap-4 sm:gap-6">
         {/* Track 1: Core Technologies (Left) */}
         <LogoLoop
@@ -278,7 +294,7 @@ export const TechStackSection: React.FC = () => {
           pauseOnHover={true}
           scaleOnHover={true}
           fadeOut={true}
-          fadeOutColor="#070707"
+          fadeOutColor="#07080A"
           ariaLabel="Core Web Technologies"
         />
 
@@ -292,7 +308,7 @@ export const TechStackSection: React.FC = () => {
           pauseOnHover={true}
           scaleOnHover={true}
           fadeOut={true}
-          fadeOutColor="#070707"
+          fadeOutColor="#07080A"
           ariaLabel="AI and Autonomous Tools"
         />
       </div>

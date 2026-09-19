@@ -34,11 +34,16 @@
   body {
     margin: 0;
     padding: 0;
-    background-color: #000000;
-    color: #efeee9;
+    background-color: #07080A;
+    color: #F4F4F5;
     font-family: 'Helvetica Neue ME', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background-color: #FF6B00;
+    color: #07080A;
   }
 
   /* Lenis Smooth Scroll standard styles */

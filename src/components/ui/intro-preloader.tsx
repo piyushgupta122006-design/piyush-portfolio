@@ -51,15 +51,20 @@ export const IntroPreloader: React.FC<IntroPreloaderProps> = ({ onComplete }) =>
             filter: "blur(12px)",
             transition: { duration: 0.6, ease: "easeInOut" },
           }}
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-black select-none"
+          className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-[#07080A] select-none"
         >
-          {/* Only text LOADING in the center using FlipFadeText */}
+          <div className="flex items-center gap-2 mb-4">
+            <span className="h-2 w-2 rounded-full bg-[#FF6B00] animate-pulse" />
+            <span className="text-[10px] font-mono tracking-[0.3em] uppercase text-[#FF6B00]">
+              SYS.DEV // 2026
+            </span>
+          </div>
           <FlipFadeText
-            words={["LOADING"]}
-            letterDuration={0.5}
-            staggerDelay={0.06}
+            words={["PIYUSH GUPTA", "ZERO-LATENCY", "ON-DEVICE AI"]}
+            letterDuration={0.4}
+            staggerDelay={0.04}
             className="min-h-0"
-            textClassName="text-4xl sm:text-6xl md:text-7xl font-bold tracking-[0.25em] text-[#FAFDEE] font-hn"
+            textClassName="text-3xl sm:text-5xl md:text-6xl font-bold tracking-[0.2em] text-[#F4F4F5] font-hn"
           />
         </motion.div>
       )}

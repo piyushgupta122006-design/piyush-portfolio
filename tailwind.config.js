@@ -8,6 +8,21 @@ export default {
     extend: {
       colors: {
         cream: "#efeee9",
+        solar: {
+          DEFAULT: "#FF6B00",
+          amber: "#F59E0B",
+          glow: "#FF8A00",
+          light: "#FFA043",
+          dark: "#CC5500",
+        },
+        carbon: {
+          950: "#07080A",
+          900: "#0B0C10",
+          850: "#0F1015",
+          800: "#14151C",
+          700: "#1C1E26",
+          600: "#272935",
+        },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
