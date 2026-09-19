@@ -49,9 +49,11 @@ export const ScrollReveal: React.FC<ScrollRevealProps> = ({
     const el = containerRef.current;
     if (!el) return;
 
-    const scroller = scrollContainerRef && scrollContainerRef.current ? scrollContainerRef.current : window;
+    const scroller = scrollContainerRef && scrollContainerRef.current ? scrollContainerRef.current : undefined;
 
-    gsap.fromTo(
+    const triggers: ScrollTrigger[] = [];
+
+    const rotTween = gsap.fromTo(
       el,
       { transformOrigin: '0% 50%', rotate: baseRotation },
       {
@@ -59,17 +61,18 @@ export const ScrollReveal: React.FC<ScrollRevealProps> = ({
         rotate: 0,
         scrollTrigger: {
           trigger: el,
-          scroller,
+          ...(scroller ? { scroller } : {}),
           start: 'top bottom',
           end: rotationEnd,
           scrub: true
         }
       }
     );
+    if (rotTween.scrollTrigger) triggers.push(rotTween.scrollTrigger);
 
     const wordElements = el.querySelectorAll('.word');
 
-    gsap.fromTo(
+    const opTween = gsap.fromTo(
       wordElements,
       { opacity: baseOpacity, willChange: 'opacity' },
       {
@@ -78,16 +81,17 @@ export const ScrollReveal: React.FC<ScrollRevealProps> = ({
         stagger: 0.05,
         scrollTrigger: {
           trigger: el,
-          scroller,
+          ...(scroller ? { scroller } : {}),
           start: 'top bottom-=20%',
           end: wordAnimationEnd,
           scrub: true
         }
       }
     );
+    if (opTween.scrollTrigger) triggers.push(opTween.scrollTrigger);
 
     if (enableBlur) {
-      gsap.fromTo(
+      const blurTween = gsap.fromTo(
         wordElements,
         { filter: `blur(${blurStrength}px)` },
         {
@@ -96,13 +100,14 @@ export const ScrollReveal: React.FC<ScrollRevealProps> = ({
           stagger: 0.05,
           scrollTrigger: {
             trigger: el,
-            scroller,
+            ...(scroller ? { scroller } : {}),
             start: 'top bottom-=20%',
             end: wordAnimationEnd,
             scrub: true
           }
         }
       );
+      if (blurTween.scrollTrigger) triggers.push(blurTween.scrollTrigger);
     }
 
     // Refresh ScrollTrigger to recalculate accurately in case of layout shifts
@@ -112,7 +117,7 @@ export const ScrollReveal: React.FC<ScrollRevealProps> = ({
 
     return () => {
       clearTimeout(timer);
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      triggers.forEach(t => t.kill());
     };
   }, [scrollContainerRef, enableBlur, baseRotation, baseOpacity, rotationEnd, wordAnimationEnd, blurStrength]);
 

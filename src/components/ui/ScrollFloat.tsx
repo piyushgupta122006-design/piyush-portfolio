@@ -52,7 +52,7 @@ export const ScrollFloat: React.FC<ScrollFloatProps> = ({
     const el = containerRef.current;
     if (!el) return;
 
-    const scroller = scrollContainerRef && scrollContainerRef.current ? scrollContainerRef.current : window;
+    const scroller = scrollContainerRef && scrollContainerRef.current ? scrollContainerRef.current : undefined;
     const charElements = el.querySelectorAll('.char');
 
     const tween = gsap.fromTo(
@@ -75,7 +75,7 @@ export const ScrollFloat: React.FC<ScrollFloatProps> = ({
         stagger: stagger,
         scrollTrigger: {
           trigger: el,
-          scroller,
+          ...(scroller ? { scroller } : {}),
           start: scrollStart,
           end: scrollEnd,
           scrub: true
