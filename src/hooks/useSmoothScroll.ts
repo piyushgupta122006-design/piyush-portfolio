@@ -16,6 +16,7 @@ export function useSmoothScroll() {
       smoothWheel: true,
       wheelMultiplier: 1.0,
       touchMultiplier: 1.5,
+      autoRaf: false, // We drive it from GSAP ticker
     });
 
     (window as any).__lenis = lenis;
@@ -23,8 +24,12 @@ export function useSmoothScroll() {
     // Reset scroll to top on page load / refresh
     lenis.scrollTo(0, { immediate: true });
 
-    // Synchronize Lenis scroll updates with GSAP ScrollTrigger
-    lenis.on('scroll', ScrollTrigger.update);
+    // Connect Lenis to ScrollTrigger — use wrapper to avoid Lenis args
+    // interfering with ScrollTrigger.update internals
+    const onLenisScroll = () => {
+      ScrollTrigger.update();
+    };
+    lenis.on('scroll', onLenisScroll);
 
     // Drive Lenis from GSAP's internal high-precision ticker
     const tickerCallback = (time: number) => {
@@ -34,14 +39,20 @@ export function useSmoothScroll() {
     gsap.ticker.add(tickerCallback);
     gsap.ticker.lagSmoothing(0);
 
-    // Refresh triggers to ensure proper coordinates
-    ScrollTrigger.refresh();
+    // Delayed refresh so pinned sections (EthosSection, FlowArt)
+    // that mount after this hook get their calculations correct
+    const refreshTimer = setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 500);
 
     return () => {
+      clearTimeout(refreshTimer);
       gsap.ticker.remove(tickerCallback);
+      lenis.off('scroll', onLenisScroll);
       lenis.destroy();
     };
   }, []);
 }
 
 export default useSmoothScroll;
+
