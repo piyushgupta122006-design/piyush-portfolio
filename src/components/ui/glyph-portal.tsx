@@ -113,8 +113,7 @@ export default function GlyphPortal({
     const canvas = document.createElement("canvas");
     const context = canvas.getContext("2d", { willReadFrequently: true });
     let disposed = false, raf = 0, dirty = true, active = true, ready = false;
-    const mountedAt = performance.now();
-    let browserFrameSeen = false, stalled = false;
+    let browserFrameSeen = false;
     let W = 1, H = 1, travel = 1, startScale = 1, endScale = 1;
     let center = { x: 0, y: 0 }, target: Ink | null = null;
     let lastProgress = -1;
@@ -122,6 +121,7 @@ export default function GlyphPortal({
     let choosing = false;
     let bounds = { x: 0, y: 0, width: 1, height: 1 };
     let fontDirty = true;
+    let lenisAttached = false;
 
     glyph.style.fontFamily = fontFamily;
     const computedFamily = getComputedStyle(glyph).fontFamily;
@@ -131,7 +131,6 @@ export default function GlyphPortal({
       catch { return false; }
     });
     glyph.style.fontFamily = [...available, DEFAULT_FONT].join(",");
-    stalled = available.length < families.length;
 
     const readInk = () => {
       if (!context) return false;
@@ -192,7 +191,7 @@ export default function GlyphPortal({
     };
 
     const paint = (progress: number) => {
-      const isStatic = motion.matches || !browserFrameSeen || stalled || !target;
+      const isStatic = motion.matches || !target;
       const p = isStatic ? 0 : progress;
       const t = clamp(p / 0.78);
       const eased = t < 0.5 ? 4 * t ** 3 : 1 - (-2 * t + 2) ** 3 / 2;
@@ -228,7 +227,7 @@ export default function GlyphPortal({
       const viewportHeight = Math.max(1, Math.min(root?.clientHeight ?? smallViewport, smallViewport));
       H = motion.matches ? Math.min(viewportHeight * 0.75, 480) : viewportHeight;
       section.style.setProperty("--gp-height", `${H}px`);
-      travel = H * length;
+      travel = Math.max(1, H * (length - 1));
       art.setAttribute("viewBox", `0 0 ${W} ${H}`);
       if (fontDirty) { ready = readInk(); fontDirty = false; }
       if (!ready) return;
@@ -236,25 +235,28 @@ export default function GlyphPortal({
       startScale = Math.min(W * 0.84 / bounds.width, wordHeight / bounds.height);
       select(target);
       for (const button of buttons) {
-        const letter = letters.find((item) => item.index === Number(button.dataset.gpLetter))!;
-        Object.assign(button.style, {
-          left: `${W / 2 + (letter.x - center.x) * startScale}px`,
-          top: `${H * .46 + (letter.y - center.y) * startScale - Math.max(0, 44 - letter.height * startScale) / 2}px`,
-          width: `${Math.max(1, letter.width * startScale)}px`,
-          height: `${Math.max(44, letter.height * startScale)}px`,
-        });
+        const letter = letters.find((item) => item.index === Number(button.dataset.gpLetter));
+        if (letter) {
+          Object.assign(button.style, {
+            left: `${W / 2 + (letter.x - center.x) * startScale}px`,
+            top: `${H * .46 + (letter.y - center.y) * startScale - Math.max(0, 44 - letter.height * startScale) / 2}px`,
+            width: `${Math.max(1, letter.width * startScale)}px`,
+            height: `${Math.max(44, letter.height * startScale)}px`,
+          });
+        }
       }
       section.style.setProperty("--gp-word-top", `${H * .46 - bounds.height * startScale / 2}px`);
       section.style.setProperty("--gp-word-bottom", `${H * .46 + bounds.height * startScale / 2}px`);
       section.dataset.gpReady = "true";
-      section.dataset.gpMotion = !motion.matches && browserFrameSeen && !stalled && target ? "on" : "off";
+      section.dataset.gpMotion = !motion.matches && target ? "on" : "off";
     };
 
     const frame = (time?: number) => {
       raf = 0;
       if (disposed) return;
       if (time !== undefined && !browserFrameSeen) {
-        browserFrameSeen = true; stalled ||= performance.now() - mountedAt > 2500; dirty = true;
+        browserFrameSeen = true;
+        dirty = true;
       }
       if (dirty) { dirty = false; layout(); }
       if (ready) paint(position());
@@ -292,11 +294,37 @@ export default function GlyphPortal({
     if (root) observer.observe(root);
     const visibility = new IntersectionObserver(([entry]) => {
       active = entry.isIntersecting;
-      if (active) { dirty = true; schedule(); }
-      else if (raf) { cancelAnimationFrame(raf); raf = 0; }
+      if (active) {
+        dirty = true;
+        schedule();
+        attachLenis();
+      } else if (raf) {
+        cancelAnimationFrame(raf);
+        raf = 0;
+      }
     }, { root, rootMargin: "100% 0px" });
     visibility.observe(section);
+
     (root ?? window).addEventListener("scroll", scroll, { passive: true });
+
+    const attachLenis = () => {
+      const lenis = (window as any).__lenis;
+      if (lenis && !lenisAttached) {
+        lenis.on('scroll', scroll);
+        lenisAttached = true;
+      }
+    };
+    attachLenis();
+
+    if (document.fonts?.ready) {
+      document.fonts.ready.then(() => {
+        if (disposed) return;
+        fontDirty = true;
+        dirty = true;
+        schedule();
+      });
+    }
+
     window.addEventListener("resize", resize);
     window.visualViewport?.addEventListener("resize", resize);
     motion.addEventListener("change", resize);
@@ -308,6 +336,10 @@ export default function GlyphPortal({
       observer.disconnect();
       visibility.disconnect();
       (root ?? window).removeEventListener("scroll", scroll);
+      const lenis = (window as any).__lenis;
+      if (lenis && lenisAttached) {
+        lenis.off('scroll', scroll);
+      }
       window.removeEventListener("resize", resize);
       window.visualViewport?.removeEventListener("resize", resize);
       motion.removeEventListener("change", resize);
