@@ -182,6 +182,19 @@ export const Skiper19: React.FC<SvgFollowScrollProps> = ({
             font-family: ui-monospace, monospace;
             letter-spacing: 0.05em;
           }
+          .gp-full-portal [data-gp-select] {
+            background: #14151C !important;
+            color: #F4F4F5 !important;
+            border: 1px solid rgba(255, 255, 255, 0.15) !important;
+            border-radius: 12px !important;
+            font-family: ui-monospace, monospace !important;
+            outline: none !important;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+          }
+          .gp-full-portal [data-gp-select]:focus-visible {
+            border-color: #FF6B00 !important;
+            outline: 2px solid #FF6B00 !important;
+          }
         `}</style>
 
         <GlyphPortal
@@ -203,6 +216,14 @@ export const Skiper19: React.FC<SvgFollowScrollProps> = ({
               <div className="absolute inset-0 bg-gradient-to-br from-[#0C0D12] via-[#101118] to-[#07080A]" />
               <div className="absolute -top-32 -right-32 w-96 sm:w-[500px] h-96 sm:h-[500px] bg-[#FF6B00]/15 rounded-full blur-[140px] pointer-events-none" />
               <div className="absolute -bottom-32 -left-32 w-96 sm:w-[500px] h-96 sm:h-[500px] bg-[#F59E0B]/10 rounded-full blur-[140px] pointer-events-none" />
+              {/* Luminous high-contrast letter fill that smoothly dissolves as user steps inside */}
+              <div
+                className="absolute inset-0 pointer-events-none transition-opacity duration-300 z-[1]"
+                style={{
+                  background: "linear-gradient(135deg, #FFFFFF 0%, #FED7AA 35%, #FF8A00 70%, #FF6B00 100%)",
+                  opacity: "calc(1 - var(--gp-reveal, 0))",
+                }}
+              />
             </div>
           }
           front={
